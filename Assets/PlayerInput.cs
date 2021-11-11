@@ -4,30 +4,35 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-
-    CharacterController cController;
+    Rigidbody2D rBody;
     public Vector2 movement = Vector2.zero;
-    public float jumpSpeed = 4.0f;
-    public float gravity = 10f;
+    public float jumpSpeed = 10.0f;
+    public float moveSpeed = 0.01f;
 
 
     void Start()
     {
-        cController = GetComponent<CharacterController>();
+        rBody = GetComponent<Rigidbody2D>();
+        rBody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
     }
 
-    //smeg
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             movement.y = jumpSpeed;
+            rBody.AddForce(movement, ForceMode2D.Impulse);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            rBody.position += new Vector2(moveSpeed, 0);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            rBody.position += new Vector2(-moveSpeed, 0);
         }
 
 
-
-        movement.y -= gravity * Time.deltaTime;
-        cController.Move(movement * Time.deltaTime);
     }
 
 
