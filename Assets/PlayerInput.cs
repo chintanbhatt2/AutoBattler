@@ -16,7 +16,7 @@ public class PlayerInput : MonoBehaviour
         cController = GetComponent<CharacterController>();
     }
 
-
+    //smeg
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
